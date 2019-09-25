@@ -1,0 +1,39 @@
+{
+  "name": "@coralproject/coral-cli-command",
+  "description": "base class for Coral CLI commands",
+  "version": "1.0.0",
+  "author": "Wyatt Johnson @wyattjoh",
+  "bugs": "https://github.com/coralproject/coral-cli-command/issues",
+  "dependencies": {
+    "@oclif/command": "^1.5.19",
+    "@oclif/config": "^1.13.3",
+    "cli-ux": "^5.3.2",
+    "isomorphic-fetch": "^2.2.1",
+    "netrc-parser": "^3.1.6"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.22.2",
+    "@types/isomorphic-fetch": "0.0.35",
+    "@types/node": "^10.14.18",
+    "globby": "^10.0.1",
+    "prettier": "^1.18.2",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.6.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "homepage": "https://github.com/coralproject/coral-cli-command",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "repository": "coralproject/coral-cli-command",
+  "scripts": {
+    "posttest": "tslint -p . -t stylish",
+    "test": "tsc -p . --noEmit",
+    "build": "tsc -p ."
+  },
+  "types": "lib/index.d.ts"
+}
