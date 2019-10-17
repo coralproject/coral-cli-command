@@ -29,7 +29,8 @@ export class APIClient {
     if (!res.ok) {
       const contentType = res.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
-        throw new Error(await res.json());
+        const { error } = await res.json();
+        throw new Error(error.message);
       } else {
         throw new Error(await res.text());
       }
