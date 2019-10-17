@@ -1,7 +1,7 @@
 {
   "name": "@coralproject/coral-cli-command",
   "description": "base class for Coral CLI commands",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "author": "Wyatt Johnson @wyattjoh",
   "bugs": "https://github.com/coralproject/coral-cli-command/issues",
   "dependencies": {

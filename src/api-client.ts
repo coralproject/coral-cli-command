@@ -23,15 +23,23 @@ export class APIClient {
     const base = this.domain.startsWith("http")
       ? this.domain
       : "https://" + this.domain;
+
     const res = await fetch(base + url, options);
 
-    const body = await res.text();
-
-    try {
-      return JSON.parse(body);
-    } catch (err) {
-      throw new Error(body);
+    if (!res.ok) {
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        throw new Error(await res.json());
+      } else {
+        throw new Error(await res.text());
+      }
     }
+
+    if (res.status === 204) {
+      return res.text();
+    }
+
+    return res.json();
   }
 
   public async graphql(query: string, variables = {}, retries = 3) {
