@@ -14,13 +14,16 @@ export class APIClient {
     this.auth = new Auth(config, domain, token);
   }
 
-  private async request(url: string, options: RequestInit) {
+  public async request(url: string, options: RequestInit) {
     options.headers = {
       ...(options.headers || {}),
       "User-Agent": `coral-cli/${this.config.version} ${this.config.platform}`
     };
 
-    const res = await fetch("http://" + this.domain + url, options);
+    const base = this.domain.startsWith("http")
+      ? this.domain
+      : "https://" + this.domain;
+    const res = await fetch(base + url, options);
 
     const body = await res.text();
 
