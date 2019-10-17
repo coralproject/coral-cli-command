@@ -1,6 +1,7 @@
 import * as Config from "@oclif/config";
 
 import Auth from "./auth";
+import { prefixScheme } from "./helpers";
 
 export class APIClient {
   private config: Config.IConfig;
@@ -20,11 +21,7 @@ export class APIClient {
       "User-Agent": `coral-cli/${this.config.version} ${this.config.platform}`
     };
 
-    const base = this.domain.startsWith("http")
-      ? this.domain
-      : "https://" + this.domain;
-
-    const res = await fetch(base + url, options);
+    const res = await fetch(prefixScheme(this.domain) + url, options);
 
     if (!res.ok) {
       const contentType = res.headers.get("content-type");

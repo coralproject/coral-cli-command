@@ -1,7 +1,7 @@
 {
   "name": "@coralproject/coral-cli-command",
   "description": "base class for Coral CLI commands",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "Wyatt Johnson @wyattjoh",
   "bugs": "https://github.com/coralproject/coral-cli-command/issues",
   "dependencies": {
@@ -14,9 +14,12 @@
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
     "@types/isomorphic-fetch": "0.0.35",
+    "@types/jest": "^24.0.19",
     "@types/node": "^10.14.18",
     "globby": "^10.0.1",
+    "jest": "^24.9.0",
     "prettier": "^1.18.2",
+    "ts-jest": "^24.1.0",
     "ts-node": "^8.4.1",
     "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0",
@@ -31,8 +34,8 @@
   "main": "lib/index.js",
   "repository": "coralproject/coral-cli-command",
   "scripts": {
-    "posttest": "tslint -p . -t stylish",
-    "test": "tsc -p . --noEmit",
+    "posttest": "tsc -p . --noEmit && tslint -p . -t stylish",
+    "test": "jest",
     "build": "tsc -p ."
   },
   "types": "lib/index.d.ts"

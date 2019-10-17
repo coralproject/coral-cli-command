@@ -3,6 +3,8 @@ import ux from "cli-ux";
 import fetch from "isomorphic-fetch";
 import Netrc from "netrc-parser";
 
+import { prefixScheme, stripSchemePort } from "./helpers";
+
 interface NetrcEntry {
   login: string;
   password: string;
@@ -19,13 +21,21 @@ export default class Auth {
     this.auth = auth;
   }
 
+  private get host() {
+    return stripSchemePort(this.domain);
+  }
+
+  private get base() {
+    return prefixScheme(this.domain);
+  }
+
   public async login() {
     return this.interactive();
   }
 
   public async logout() {
     await Netrc.load();
-    delete Netrc.machines[this.domain];
+    delete Netrc.machines[this.host];
     await Netrc.save();
   }
 
@@ -35,8 +45,8 @@ export default class Auth {
         this.auth = process.env.CORAL_API_TOKEN;
       } else {
         Netrc.loadSync();
-        if (Netrc.machines[this.domain]) {
-          this.auth = Netrc.machines[this.domain].password;
+        if (Netrc.machines[this.host]) {
+          this.auth = Netrc.machines[this.host].password;
         }
       }
     }
@@ -52,7 +62,7 @@ export default class Auth {
     const email = await ux.prompt("Email", {});
     const password = await ux.prompt("Password", { type: "hide" });
 
-    const res = await fetch("http://" + this.domain + "/api/auth/local", {
+    const res = await fetch(this.base + "/api/auth/local", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -81,12 +91,12 @@ export default class Auth {
   }
 
   private async saveToken(entry: NetrcEntry) {
-    if (!Netrc.machines[this.domain]) {
-      Netrc.machines[this.domain] = {};
-      Netrc.machines[this.domain].login = entry.login;
-      Netrc.machines[this.domain].password = entry.password;
-      delete Netrc.machines[this.domain].method;
-      delete Netrc.machines[this.domain].org;
+    if (!Netrc.machines[this.host]) {
+      Netrc.machines[this.host] = {};
+      Netrc.machines[this.host].login = entry.login;
+      Netrc.machines[this.host].password = entry.password;
+      delete Netrc.machines[this.host].method;
+      delete Netrc.machines[this.host].org;
     }
     await Netrc.save();
   }
