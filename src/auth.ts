@@ -67,9 +67,9 @@ export default class Auth {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "User-Agent": `coral-cli/${this.config.version} ${this.config.platform}`
+        "User-Agent": `coral-cli/${this.config.version} ${this.config.platform}`,
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }),
     });
 
     const body = await res.json();
@@ -86,7 +86,7 @@ export default class Auth {
 
     await this.saveToken({
       login: email,
-      password: token
+      password: token,
     });
   }
 

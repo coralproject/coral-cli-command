@@ -18,7 +18,7 @@ export class APIClient {
   public async request(url: string, options: RequestInit) {
     options.headers = {
       ...(options.headers || {}),
-      "User-Agent": `coral-cli/${this.config.version} ${this.config.platform}`
+      "User-Agent": `coral-cli/${this.config.version} ${this.config.platform}`,
     };
 
     const res = await fetch(prefixScheme(this.domain) + url, options);
@@ -52,13 +52,13 @@ export class APIClient {
 
     const headers: HeadersInit = {
       "content-type": "application/json",
-      authorization: `Bearer ${this.auth.token}`
+      authorization: `Bearer ${this.auth.token}`,
     };
 
     const { data, errors } = await this.request("/api/graphql", {
       method: "POST",
       headers,
-      body: JSON.stringify({ query, variables })
+      body: JSON.stringify({ query, variables }),
     });
 
     if (errors && errors.length > 0) {

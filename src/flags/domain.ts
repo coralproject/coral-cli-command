@@ -8,5 +8,5 @@ export const domain = flags.build({
     if (env) {
       return env;
     }
-  }
+  },
 });

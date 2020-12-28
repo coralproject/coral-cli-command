@@ -10,7 +10,7 @@ it("does not prefix schemes when they already exist", () => {
     "http://localhost:3000",
     "https://localhost:3000",
     "https://coralproject.net",
-    "http://coralproject.net"
+    "http://coralproject.net",
   ];
 
   for (const url of urls) {
