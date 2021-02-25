@@ -1,5 +1,8 @@
 # @coralproject/coral-cli-command
 
+![Tests](https://github.com/coralproject/coral-cli-command/workflows/test/badge.svg)
+[![Version](https://img.shields.io/npm/v/@coralproject/coral-cli-command.svg)](https://npmjs.org/package/@coralproject/coral-cli-command)
+
 ## Releasing
 
 When you're ready to release a new vesrion of `@coralproject/coral-cli-command`,
@@ -12,4 +15,4 @@ you can do the following:
    the version is in `main`, create a release with the version number: `v0.4.0`
    (Note that the `v` prefix is required)
 
-CircleCI will run your tests and release the new version for you.
+GitHub Actions will run your tests and release the new version for you.
